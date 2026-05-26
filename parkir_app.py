@@ -141,7 +141,7 @@ class SistemParkirValet:
 
 st.set_page_config(page_title="Smart Parking System Pro", page_icon="🏢", layout="centered")
 
-st.title("🏢 Smart Parking Dashboard Pro")
+st.title("🚗 Smart Parking System")
 st.caption("Sistem Manajemen Parkir Valet Terintegrasi - Berbasis Doubly Linked List")
 
 # Inisialisasi Session State agar data tidak hilang saat web rerun
@@ -171,7 +171,7 @@ with tab1:
     
     with st.form("form_pendaftaran", clear_on_submit=True):
         plat_input = st.text_input("Plat Nomor Kendaraan", placeholder="Contoh: B 1234 ABC")
-        merk_input = st.text_input("Merk / Model Kendaraan", placeholder="Contoh: Honda Brio Hitam")
+        merk_input = st.text_input("Merk Kendaraan", placeholder="Contoh: Honda Brio Hitam")
         pemilik_input = st.text_input("Nama Lengkap Pemilik", placeholder="Contoh: Ahmad Subarjo")
         status_input = st.radio("Pilih Tipe Layanan Parkir", ["Reguler (Antrean Belakang)", "VIP (Prioritas Depan)"])
         
@@ -193,7 +193,7 @@ with tab1:
 
 # --- MENU 2: CHECK-OUT ---
 with tab2:
-    st.header("Form Penjemputan & Billing Kasir")
+    st.header("Form Billing Kasir")
     plat_keluar = st.text_input("Masukkan Plat Nomor Mobil yang Ingin Keluar", key="input_checkout")
     tombol_keluar = st.button("Proses Pembayaran Keluar", type="primary")
     
@@ -206,7 +206,7 @@ with tab2:
                 st.session_state.riwayat_pendapatan.append(struk)
                 
                 # Desain Struk
-                st.markdown("### 🧾 STRUK NOTA SMART PARKING")
+                st.markdown("### 🧾 STRUK SMART PARKING")
                 st.markdown("---")
                 col_kiri, col_kanan = st.columns(2)
                 with col_kiri:
@@ -239,7 +239,7 @@ with tab3:
     else:
         st.info("Kondisi Parkiran Kosong. Belum ada kendaraan yang terdaftar masuk.")
 
-# --- MENU 4: CARI MOBIL (MENU BARU) ---
+# --- MENU 4: CARI MOBIL ---
 with tab4:
     st.header("🔍 Pelacakan Posisi Kendaraan")
     st.caption("Gunakan menu ini untuk mengetahui di urutan ke berapa mobil berada di dalam antrean.")
@@ -257,8 +257,8 @@ with tab4:
                 st.write(f"**Model Mobil:** {hasil_cari['merk']}")
                 st.write(f"**Jam Masuk:** {hasil_cari['jam_masuk']}")
                 st.markdown("---")
-                st.warning(f"⬅️ **Mobil di Depannya (PREV):** {hasil_cari['mobil_depan']}")
-                st.info(f"➡️ **Mobil di Belakangnya (NEXT):** {hasil_cari['mobil_belakang']}")
+                st.warning(f"⬅️ **Mobil di Depannya:** {hasil_cari['mobil_depan']}")
+                st.info(f"➡️ **Mobil di Belakangnya:** {hasil_cari['mobil_belakang']}")
             else:
                 st.error("Kendaraan tidak ditemukan di dalam area parkir.")
         else:
@@ -278,7 +278,7 @@ with tab5:
         col_m1.metric("Total Pendapatan", f"Rp {total_omset:,}")
         col_m2.metric("Total Mobil Keluar", f"{len(riwayat)} Unit")
         
-        st.markdown("### 📜 Riwayat Transaksi Sesi Ini")
+        st.markdown("### 📜 Riwayat Transaksi")
         kolom_keuangan = ["Plat Nomor", "Status Kelas", "Durasi", "Total Bayar"]
         matriks_keuangan = []
         for r in riwayat:
